@@ -1,10 +1,8 @@
 import { Client } from 'twitter-api-sdk'
-import { createClient } from 'redis'
 import { createObjectCsvWriter } from 'csv-writer';
 import config from './config'
 
 const twitterClient = new Client(process.env.BEARER_TOKEN);
-const redisClient = createClient();
 const maxTweets = null;
 
 const csvWriter = createObjectCsvWriter({
@@ -42,7 +40,7 @@ async function getTweets(): Promise<{tweets: any[], users: Map<string, string>, 
                 query: config.query,
                 start_time: config.start_time,
                 end_time: config.end_time,
-                pagination_token: paginationToken, 
+                pagination_token: paginationToken,
                 "tweet.fields": ["public_metrics", 'referenced_tweets'],
                 "user.fields": ["username"],
                 expansions: ["author_id", "referenced_tweets.id"],
@@ -67,7 +65,6 @@ async function getTweets(): Promise<{tweets: any[], users: Map<string, string>, 
 }
 
 async function run() {
-    await redisClient.connect();
     const tweets = await getTweets();
     const mappedTweets = tweets.tweets.map((tweet: any) => mapTweet(tweet, tweets.users, tweets.referenced_tweets));
     csvWriter.writeRecords(mappedTweets);

@@ -11,6 +11,12 @@ The query parameter should be in twitter's format. Documentation can be found he
 The script requires the following tools to be installed:
 - nodejs
 
+### Installing dependencies
+Run this command to install dependencies:
+```shell
+> npm install
+```
+
 ### Running
 An API key with academic access is required to use the script. It should be provided as an environment variable.
 To run the script, use this command:
