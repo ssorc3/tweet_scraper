@@ -1,6 +1,12 @@
 # Tweet downloader
 This script downloads tweets specified by the parameters in the `config.ts` file.
 
+The tweets are output to `out.csv` with the columns:
+- text - The text of the tweet
+- retweet_count - the number of retweets the tweet got
+- username - the user who wrote the tweet
+- reply_to - the tweet that this tweet was a reply to
+
 ## Config
 The config is in the file `config.ts`.
 The `start_time` and `end_time` parameter should be in the form `"2000-02-01T00:00:00Z"` for midnight UTC on Feb 1st 2000.
